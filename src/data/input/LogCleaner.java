@@ -35,7 +35,7 @@ public class LogCleaner {
    
     public String cleanAndEncrypt(StringBuilder sb) {
         String output = separateSentences(sb);
-        output = cipher(output, 4);
+        //output = cipher(output, 4);
         return output;
     }
 }
