@@ -64,15 +64,12 @@ public class LogTracker {
     }
     
     private char checkIfMakeUpper(char c) {
-        if (isCaps == true) {
-            c = Character.toUpperCase(c);
-        }
-        return c;
+        return isCaps ? Character.toUpperCase(c) : c;
     }
 
     private void exportString(LogCleaner cleaner, LogWriter writer) throws IOException {
         if (log.length() != 0) {
-            writer.writeLog(cleaner.cleanAndEncrypt(log));
+            writer.writeLog(cleaner.cleanAndEncrypt(log.toString()));
         }
         log = new StringBuilder("");
     }
