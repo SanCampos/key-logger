@@ -12,6 +12,10 @@ public class Manager {
     
     private LogWriter writer;
 
+    public Manager() throws IOException {
+        this.writer = new LogWriter();
+    }
+
     public void run() throws IOException {
         new LogTracker().run(new LogCleaner(), writer);
         
