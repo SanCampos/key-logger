@@ -9,10 +9,9 @@ public class LogCleaner {
     }
 
     public String separateSentences(String s) {
-        s = s.replace("!", System.lineSeparator());
-        s = s.replace(".", System.lineSeparator());
-        s = s.replace("?", System.lineSeparator());
-        return s;
+        return s.replace("!", System.lineSeparator())
+                .replace(".", System.lineSeparator())
+                .replace("?", System.lineSeparator());
     }
 
     public String cipher(String msg, int shift) {
