@@ -2,19 +2,19 @@ package data.input;
 
 public class LogCleaner {
 
-    public String cleanAndEncrypt(String s) {
+    public static String cleanAndEncrypt(String s) {
         String output = separateSentences(s);
         //output = cipher(output, 4);
         return output;
     }
 
-    public String separateSentences(String s) {
+    public static String separateSentences(String s) {
         return s.replace("!", System.lineSeparator())
                 .replace(".", System.lineSeparator())
                 .replace("?", System.lineSeparator());
     }
 
-    public String cipher(String msg, int shift) {
+    public static String cipher(String msg, int shift) {
         String s = "";
 
         for (int i = 0; i < msg.length(); i++) {

