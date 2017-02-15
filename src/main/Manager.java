@@ -17,7 +17,7 @@ public class Manager {
     }
 
     public void run() throws IOException {
-        new LogTracker().run(writer);
+        LogTracker.run(writer);
         
         SimpleDateFormat sdf = new SimpleDateFormat("EEE, MMM dd, yyyy z");
         Date currentDate = new Date();
