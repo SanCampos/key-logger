@@ -9,18 +9,13 @@ import java.util.Date;
 
 
 public class Manager {
-    
-    private LogWriter writer;
 
-    public Manager() throws IOException {
-        this.writer = new LogWriter();
-    }
-
-    public void run() throws IOException {
-        LogTracker.run(writer);
+    public static void run() throws IOException {
+        LogWriter.initiate();
+        LogTracker.run();
         
         SimpleDateFormat sdf = new SimpleDateFormat("EEE, MMM dd, yyyy z");
         Date currentDate = new Date();
-        writer.writeLog(sdf.format(currentDate));
+        LogWriter.writeLog(sdf.format(currentDate));
     }
 }
